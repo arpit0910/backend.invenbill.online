@@ -25,6 +25,7 @@ class User extends Authenticatable
         'country_code',
         'mobile',
         'gender',
+        'is_active',
     ];
 
     /**

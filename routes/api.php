@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'register']);
@@ -13,14 +14,17 @@ Route::post('reset-password', [AuthController::class, 'resetPassword']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
-    Route::get('profile', [ProfileController::class, 'show']);
-    Route::put('profile', [ProfileController::class, 'update']);
-    Route::patch('profile', [ProfileController::class, 'update']);
+    Route::get('profile/detail', [ProfileController::class, 'show']);
+    Route::patch('profile/update', [ProfileController::class, 'update']);
 
     Route::get('users', [UserController::class, 'index']);
-    Route::post('users', [UserController::class, 'store']);
-    Route::get('users/{user}', [UserController::class, 'show']);
-    Route::put('users/{user}', [UserController::class, 'update']);
-    Route::patch('users/{user}', [UserController::class, 'update']);
-    Route::delete('users/{user}', [UserController::class, 'destroy']);
+    Route::post('user/store', [UserController::class, 'store']);
+    Route::get('users/{user}/detail', [UserController::class, 'show']);
+    Route::patch('users/{user}/update', [UserController::class, 'update']);
+    Route::delete('users/{user}/delete', [UserController::class, 'destroy']);
+
+    // Warehouse Routes
+    Route::post('warehouse/store', [WarehouseController::class, 'store']);
+    Route::patch('warehouse/{id}/update', [WarehouseController::class, 'update']);
+    Route::patch('warehouse/{id}/toggle-status', [WarehouseController::class, 'toggleStatus']);
 });
