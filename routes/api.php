@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WarehouseController;
@@ -27,4 +28,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('warehouse/store', [WarehouseController::class, 'store']);
     Route::patch('warehouse/{id}/update', [WarehouseController::class, 'update']);
     Route::patch('warehouse/{id}/toggle-status', [WarehouseController::class, 'toggleStatus']);
+
+    // Category Routes
+    Route::get('categories', [CategoryController::class, 'index']);
+    Route::post('category/store', [CategoryController::class, 'store']);
+    Route::get('categories/{id}/detail', [CategoryController::class, 'show']);
+    Route::patch('categories/{id}/update', [CategoryController::class, 'update']);
+    Route::patch('categories/{id}/toggle-status', [CategoryController::class, 'toggleStatus']);
 });

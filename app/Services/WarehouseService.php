@@ -19,6 +19,13 @@ class WarehouseService
      */
     public function createWarehouse(array $data): Warehouse
     {
+        // Trim string inputs
+        array_walk($data, function (&$value) {
+            if (is_string($value)) {
+                $value = trim($value);
+            }
+        });
+
         return DB::transaction(function () use ($data) {
             // Step 1: Create the User (Manager)
             $manager = User::create([
@@ -64,6 +71,13 @@ class WarehouseService
      */
     public function updateWarehouse(Warehouse $warehouse, array $data): Warehouse
     {
+        // Trim string inputs
+        array_walk($data, function (&$value) {
+            if (is_string($value)) {
+                $value = trim($value);
+            }
+        });
+
         $warehouse->update($data);
         return $warehouse;
     }
