@@ -21,6 +21,20 @@ class WarehouseController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function index(): JsonResponse
+    {
+        $warehouses = $this->warehouseService->getAllWarehouses();
+
+        return sendResponse(
+            WarehouseResource::collection($warehouses),
+            'Warehouses list',
+            200
+        );
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreWarehouseRequest $request): JsonResponse

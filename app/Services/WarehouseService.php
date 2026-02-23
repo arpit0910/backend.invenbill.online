@@ -11,6 +11,16 @@ use Exception;
 class WarehouseService
 {
     /**
+     * Get all warehouses.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllWarehouses()
+    {
+        return Warehouse::with('manager')->latest()->get();
+    }
+
+    /**
      * Create a new warehouse and its manager.
      *
      * @param array $data

@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('users/{user}/delete', [UserController::class, 'destroy']);
 
     // Warehouse Routes
+    Route::get('warehouses', [WarehouseController::class, 'index']);
     Route::post('warehouse/store', [WarehouseController::class, 'store']);
     Route::patch('warehouse/{id}/update', [WarehouseController::class, 'update']);
     Route::patch('warehouse/{id}/toggle-status', [WarehouseController::class, 'toggleStatus']);
