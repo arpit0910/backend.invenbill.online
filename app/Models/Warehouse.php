@@ -11,8 +11,10 @@ class Warehouse extends Model
     use HasFactory;
 
     protected $fillable = [
+        'created_by',
         'name',
         'warehouse_code',
+        'location',
         'address',
         'city',
         'state',
@@ -30,6 +32,11 @@ class Warehouse extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 
     public function manager(): BelongsTo
     {

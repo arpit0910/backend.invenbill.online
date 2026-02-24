@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WarehouseController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\InventoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'register']);
@@ -36,4 +38,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('categories/{id}/detail', [CategoryController::class, 'show']);
     Route::patch('categories/{id}/update', [CategoryController::class, 'update']);
     Route::patch('categories/{id}/toggle-status', [CategoryController::class, 'toggleStatus']);
+
+    // Product Routes
+    Route::get('products', [ProductController::class, 'index']);
+    Route::post('products', [ProductController::class, 'store']);
+    Route::get('products/{id}', [ProductController::class, 'show']);
+    Route::put('products/{id}', [ProductController::class, 'update']);
+    Route::patch('products/{id}', [ProductController::class, 'update']);
+    Route::delete('products/{id}', [ProductController::class, 'destroy']);
+    Route::post('products/{id}/images', [ProductController::class, 'uploadImages']);
+    Route::put('products/{product}/images/{image}/set-main', [ProductController::class, 'setMainImage']);
+
+    // Inventory Routes
+    Route::put('products/{product}/inventory/{warehouse}', [InventoryController::class, 'upsert']);
 });

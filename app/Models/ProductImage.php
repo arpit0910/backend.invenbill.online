@@ -6,22 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Category extends Model
+class ProductImage extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'created_by',
-        'name',
-        'slug',
-        'description',
-        'short_description',
+        'product_id',
         'image_path',
-        'status',
+        'is_main',
     ];
 
-    public function admin(): BelongsTo
+    protected $casts = [
+        'is_main' => 'boolean',
+    ];
+
+    public function product(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(Product::class);
     }
 }
+
